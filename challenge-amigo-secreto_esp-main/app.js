@@ -15,14 +15,32 @@ function actualizarLista() {
 }
 
 function agregarAmigo() {
-	const input = document.getElementById('amigo'); // busca el input
-	const nombre = input.value; // toma el texto y quita espacios
+	const input = document.getElementById('amigo');
+	const nombre = input.value;
 
 	if (nombre !== '') {
-		amigos.push(nombre); // guarda el nombre en el array
+		amigos.push(nombre);
 		actualizarLista();
-		input.value = ''; // limpia el campo
+		input.value = '';
 	} else {
 		alert('Por favor, escribe un nombre.');
 	}
+}
+
+function sortearAmigo() {
+	const resultado = document.getElementById('resultado');
+	const lista = document.getElementById('listaAmigos');
+
+	lista.innerHTML = '';
+	resultado.innerHTML = '';
+
+	if (amigos.length === 0) {
+		resultado.innerHTML = '<li>Agrega un nombre</li>';
+		return;
+	}
+	const indice = Math.floor(Math.random() * amigos.length);
+	const elegido = amigos[indice];
+	const li = document.createElement('li');
+	li.textContent = `Tu amigo secreto es ${elegido}`;
+	resultado.appendChild(li);
 }
